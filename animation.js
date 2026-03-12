@@ -12,11 +12,7 @@
  */
 
 // ── Register GSAP Plugins ──
-gsap.registerPlugin(SplitText, DrawSVGPlugin, CustomEase, MotionPathPlugin);
-
-// ── Custom Eases ──
-CustomEase.create('elasticCrash', 'M0,0 C0.14,0 0.242,0.438 0.272,0.561 0.313,0.728 0.354,0.963 0.362,1 0.404,0.963 0.457,1.017 0.5,1 0.543,0.983 0.605,1 0.672,1 0.75,1 1,1');
-CustomEase.create('snapIn', 'M0,0 C0.6,0 0.4,1 1,1');
+gsap.registerPlugin(SplitText, DrawSVGPlugin, CustomEase);
 
 // ── Config ──
 const PRODUCTS_PER_CYCLE = 1;
