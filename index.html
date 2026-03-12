@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Roots – Deal Alert</title>
+
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <!-- GSAP Core + Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/DrawSVGPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/CustomEase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/MotionPathPlugin.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=k7m2p9">
+</head>
+<body>
+  <div id="scene">
+
+    <!-- ── Background Layers ── -->
+    <div id="bg-main"></div>
+    <div id="bg-texture"></div>
+    <div id="bg-vignette"></div>
+
+    <!-- ── Atmospheric Particles ── -->
+    <div id="particle-layer"></div>
+
+    <!-- ── CRT Scan Lines ── -->
+    <div id="scan-lines"></div>
+
+    <!-- ── Screen Flash Overlay ── -->
+    <div id="screen-flash"></div>
+
+    <!-- ── Product Content (swapped each cycle) ── -->
+    <div id="products-container"></div>
+
+    <!-- ── Foreground Depth Layer (botanical) ── -->
+    <div id="foreground-layer">
+      <img
+        class="botanical botanical-left"
+        src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fforeground_botanical-1773309657273.png"
+        alt=""
+      >
+      <img
+        class="botanical botanical-right"
+        src="https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fforeground_botanical-1773309657273.png"
+        alt=""
+      >
+    </div>
+
+    <!-- ── Persistent UI (always on top) ── -->
+    <div id="ui-layer">
+
+      <!-- Top Bar -->
+      <div id="top-bar">
+        <div id="logo-area">
+          <div id="logo-icon">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="26,2 36,14 50,14 40,24 44,38 26,30 8,38 12,24 2,14 16,14" fill="#7BC940" opacity="0.25"/>
+              <path d="M26 6 C26 6 10 18 10 30 C10 40 18 47 26 47 C34 47 42 40 42 30 C42 18 26 6 26 6Z" fill="#7BC940"/>
+              <path d="M26 47 L26 51" stroke="#7BC940" stroke-width="3" stroke-linecap="round"/>
+              <path d="M14 28 C18 32 22 38 26 46" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M38 28 C34 32 30 38 26 46" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M26 14 C26 14 22 22 22 28" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div id="logo-text">
+            <span class="logo-quality">QUALITY</span>
+            <span class="logo-roots">ROOTS</span>
+          </div>
+        </div>
+
+        <!-- Decorative center line -->
+        <div id="top-center">
+          <div class="top-decor-line"></div>
+          <div class="top-decor-diamond">◆</div>
+          <div class="top-decor-line"></div>
+        </div>
+
+        <!-- Live Deals Indicator -->
+        <div id="deal-alert-wrap">
+          <div id="deal-alert">
+            <span class="deal-dot" id="dot-1">●</span>
+            <span class="deal-label">LIVE&nbsp;DEALS</span>
+            <span class="deal-dot" id="dot-2">●</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corner Frame Decorations -->
+      <div class="corner-frame corner-tl">
+        <div class="cf-h"></div><div class="cf-v"></div>
+      </div>
+      <div class="corner-frame corner-tr">
+        <div class="cf-h"></div><div class="cf-v"></div>
+      </div>
+      <div class="corner-frame corner-bl">
+        <div class="cf-h"></div><div class="cf-v"></div>
+      </div>
+      <div class="corner-frame corner-br">
+        <div class="cf-h"></div><div class="cf-v"></div>
+      </div>
+
+      <!-- Bottom Ticker -->
+      <div id="ticker-bar">
+        <div id="ticker-label">
+          <span>DEALS</span>
+        </div>
+        <div id="ticker-divider">◆</div>
+        <div id="ticker-track">
+          <div id="ticker-inner"></div>
+        </div>
+      </div>
+
+    </div><!-- /ui-layer -->
+  </div><!-- /scene -->
+
+  <script src="animation.js?v=k7m2p9"></script>
+</body>
+</html>

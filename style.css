@@ -1,0 +1,753 @@
+/* =========================================================
+   QUALITY ROOTS — Deal Alert Template
+   Canvas: 1920 × 1080px
+   ========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img { display: block; }
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ── Scene Canvas ── */
+#scene {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================================
+   BACKGROUND LAYERS
+   ========================================================= */
+
+#bg-main {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fbackground_main-1773309580452.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+#bg-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fbg_texture-1773309711370.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+}
+
+#bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 110% 95% at 50% 50%,
+    transparent 25%,
+    rgba(0, 0, 0, 0.55) 75%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 2;
+}
+
+/* ── Scan Lines ── */
+#scan-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.035) 3px,
+    rgba(0, 0, 0, 0.035) 4px
+  );
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ── Particles ── */
+#particle-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #7BC940;
+  pointer-events: none;
+}
+
+/* ── Screen Flash ── */
+#screen-flash {
+  position: absolute;
+  inset: 0;
+  background: #7BC940;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* =========================================================
+   PRODUCTS CONTAINER
+   ========================================================= */
+
+#products-container {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 90px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Product Scene Layout ── */
+.product-scene {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 70px;
+  gap: 55px;
+}
+
+/* =========================================================
+   PRODUCT IMAGE AREA (left column)
+   ========================================================= */
+
+.product-image-area {
+  position: relative;
+  width: 680px;
+  min-width: 680px;
+  height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Spotlight beam from above */
+.spotlight-beam {
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 340px;
+  height: 760px;
+  background: linear-gradient(
+    to bottom,
+    rgba(123, 201, 64, 0.3) 0%,
+    rgba(123, 201, 64, 0.08) 55%,
+    transparent 100%
+  );
+  clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+  z-index: 0;
+  transform-origin: top center;
+  pointer-events: none;
+}
+
+/* Radial glow behind product */
+.product-glow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(123, 201, 64, 0.18) 0%,
+    rgba(123, 201, 64, 0.06) 50%,
+    transparent 70%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ring decoration behind product */
+.product-glow::after {
+  content: '';
+  position: absolute;
+  inset: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(123, 201, 64, 0.15);
+  box-shadow:
+    0 0 0 20px rgba(123, 201, 64, 0.04),
+    0 0 0 40px rgba(123, 201, 64, 0.02);
+}
+
+/* Product image */
+.product-image {
+  position: relative;
+  z-index: 2;
+  max-width: 540px;
+  max-height: 540px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 24px 60px rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 30px rgba(123, 201, 64, 0.15));
+}
+
+/* Ground shadow */
+.product-shadow {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 380px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 0, 0, 0.75) 0%,
+    transparent 70%
+  );
+  z-index: 1;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+/* =========================================================
+   PRODUCT INFO AREA (right column)
+   ========================================================= */
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding-top: 10px;
+}
+
+/* ── Category Badge ── */
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(123, 201, 64, 0.12);
+  border: 2px solid rgba(123, 201, 64, 0.6);
+  color: #7BC940;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  padding: 7px 22px;
+  width: fit-content;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.category-badge::before {
+  content: '▸';
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ── Brand Name ── */
+.brand-line {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* ── Product Title ── */
+.product-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin-bottom: 26px;
+  max-width: 920px;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.product-title .word {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* ── Divider line ── */
+.info-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(123, 201, 64, 0.5),
+    rgba(123, 201, 64, 0.15) 60%,
+    transparent
+  );
+  margin-bottom: 22px;
+}
+
+/* ── Price Block ── */
+.price-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
+}
+
+/* WAS row */
+.price-was-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 6px;
+}
+
+.was-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.price-original-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
+}
+
+.price-original {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 76px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1;
+  letter-spacing: 2px;
+  display: block;
+}
+
+/* DrawSVG slash over original price */
+.slash-svg {
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: 100%;
+  overflow: visible;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.slash-line {
+  stroke: #FF3636;
+  stroke-width: 8;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(255, 54, 54, 0.9));
+}
+
+/* NOW row */
+.price-now-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transform-origin: left center;
+}
+
+.now-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(123, 201, 64, 0.7);
+  text-transform: uppercase;
+  margin-bottom: -4px;
+}
+
+.price-new {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 200px;
+  line-height: 0.85;
+  color: #7BC940;
+  letter-spacing: -4px;
+  text-shadow:
+    0 0 100px rgba(123, 201, 64, 0.7),
+    0 0 40px rgba(123, 201, 64, 0.4),
+    5px 5px 0 rgba(0, 0, 0, 0.7),
+    -1px -1px 0 rgba(0, 0, 0, 0.3);
+  transform-origin: left bottom;
+  display: block;
+}
+
+/* ── Save Badge ── */
+.save-badge-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 185px;
+  height: 185px;
+  transform-origin: center center;
+  margin-bottom: 18px;
+  flex-shrink: 0;
+}
+
+.save-burst-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.save-badge-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #0A1F0D;
+  padding: 10px;
+}
+
+.save-word {
+  font-size: 26px;
+  letter-spacing: 4px;
+  line-height: 1;
+  margin-bottom: -4px;
+}
+
+.save-pct-num {
+  font-size: 68px;
+  line-height: 0.9;
+  font-weight: 900;
+}
+
+.save-off-word {
+  font-size: 22px;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+/* ── Meta Row (strain / THC) ── */
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.strain-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #0A1F0D;
+  background: #7BC940;
+  padding: 6px 18px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+}
+
+.thc-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 6px 18px;
+}
+
+/* ── Side-by-side: price area + save badge ── */
+.price-and-badge {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+/* =========================================================
+   FOREGROUND BOTANICAL DEPTH LAYER
+   ========================================================= */
+
+#foreground-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.botanical {
+  position: absolute;
+  height: 650px;
+  width: auto;
+}
+
+.botanical-left {
+  left: -160px;
+  bottom: 60px;
+  opacity: 0.45;
+  transform: scaleX(-1) rotate(-5deg);
+  transform-origin: bottom center;
+}
+
+.botanical-right {
+  right: -160px;
+  bottom: 60px;
+  opacity: 0.45;
+  transform: rotate(5deg);
+  transform-origin: bottom center;
+}
+
+/* =========================================================
+   UI LAYER (always on top)
+   ========================================================= */
+
+#ui-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* ── Top Bar ── */
+#top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 55px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  border-bottom: 1px solid rgba(123, 201, 64, 0.25);
+}
+
+/* Logo */
+#logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+#logo-icon svg {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 0 12px rgba(123, 201, 64, 0.4));
+}
+
+#logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0;
+}
+
+.logo-quality {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.logo-roots {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: #FFFFFF;
+  letter-spacing: 5px;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(123, 201, 64, 0.35);
+}
+
+/* Center decorative element */
+#top-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.top-decor-line {
+  height: 1px;
+  width: 120px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(123, 201, 64, 0.4),
+    rgba(123, 201, 64, 0.1)
+  );
+}
+
+.top-decor-line:last-child {
+  transform: scaleX(-1);
+}
+
+.top-decor-diamond {
+  font-size: 10px;
+  color: rgba(123, 201, 64, 0.5);
+}
+
+/* Deal Alert indicator */
+#deal-alert-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#deal-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: #7BC940;
+  text-transform: uppercase;
+}
+
+.deal-dot {
+  font-size: 9px;
+  color: #7BC940;
+}
+
+/* ── Corner Frame Decorations ── */
+.corner-frame {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+}
+
+.corner-frame .cf-h,
+.corner-frame .cf-v {
+  position: absolute;
+  background: rgba(123, 201, 64, 0.45);
+}
+
+.corner-frame .cf-h { width: 100%; height: 2px; }
+.corner-frame .cf-v { width: 2px; height: 100%; }
+
+.corner-tl { top: 90px; left: 20px; }
+.corner-tl .cf-h { top: 0; left: 0; }
+.corner-tl .cf-v { top: 0; left: 0; }
+
+.corner-tr { top: 90px; right: 20px; }
+.corner-tr .cf-h { top: 0; right: 0; }
+.corner-tr .cf-v { top: 0; right: 0; }
+
+.corner-bl { bottom: 100px; left: 20px; }
+.corner-bl .cf-h { bottom: 0; left: 0; }
+.corner-bl .cf-v { bottom: 0; left: 0; }
+
+.corner-br { bottom: 100px; right: 20px; }
+.corner-br .cf-h { bottom: 0; right: 0; }
+.corner-br .cf-v { bottom: 0; right: 0; }
+
+/* ── Bottom Ticker ── */
+#ticker-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #7BC940;
+  border-top: 3px solid #5FA832;
+}
+
+/* Diagonal stripe overlay on ticker */
+#ticker-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 18px,
+    rgba(0, 0, 0, 0.04) 18px,
+    rgba(0, 0, 0, 0.04) 20px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+#ticker-label {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  background: #0A1F0D;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  min-width: 140px;
+  justify-content: center;
+}
+
+#ticker-label span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: #7BC940;
+  letter-spacing: 6px;
+}
+
+#ticker-divider {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: #0A1F0D;
+  opacity: 0.5;
+  padding: 0 16px;
+}
+
+#ticker-track {
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+#ticker-inner {
+  white-space: nowrap;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 38px;
+  color: #0A1F0D;
+  letter-spacing: 3px;
+  will-change: transform;
+  padding-left: 40px;
+}

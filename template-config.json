@@ -1,0 +1,70 @@
+{
+  "template_id": "qr-deal-alert-spotlight-v1",
+  "name": "Quality Roots – Deal Alert Spotlight",
+  "created_at": "2026-03-12T00:00:00.000Z",
+  "version": "1.0.0",
+  "theme": {
+    "style": "streetwear_botanical_dark",
+    "description": "Premium dark forest-green atmosphere with bold streetwear typography energy. Products descend into a dramatic spotlight with a cinematic price-reveal sequence. Deep emerald background, lime-green accents, CRT scan-line texture, botanical foreground depth.",
+    "colors": ["#0A1F0D", "#1B3A20", "#7BC940", "#9FD95C", "#FFFFFF", "#FF3636"],
+    "mood": "bold, urgent, premium, cinematic, streetwear, deal-energy",
+    "tags": ["cannabis", "dispensary", "promo", "deals", "streetwear", "dark", "green", "spotlight"]
+  },
+  "capabilities": {
+    "products_per_cycle": 1,
+    "cycles_through_all_products": true,
+    "shows_discount": true,
+    "shows_strain": true,
+    "shows_thc": true,
+    "shows_brand": true,
+    "shows_category": true
+  },
+  "animation": {
+    "total_cycle_duration": 10.5,
+    "fps": 30,
+    "phases": {
+      "entry_flash_duration": 0.35,
+      "spotlight_arrival_duration": 0.65,
+      "product_drop_duration": 1.1,
+      "text_cascade_duration": 1.4,
+      "price_reveal_duration": 1.5,
+      "save_badge_spin_duration": 0.85,
+      "living_moment_duration": 3.2,
+      "exit_sweep_duration": 0.72
+    },
+    "uses_plugins": ["SplitText", "DrawSVGPlugin", "CustomEase", "MotionPathPlugin"],
+    "key_techniques": [
+      "elastic.out bounce on product drop",
+      "DrawSVG red slash across original price",
+      "elastic.out explosion on new price reveal",
+      "elastic spin on save badge",
+      "SplitText word-stagger on product title",
+      "floating product during living moment",
+      "glowing price shadow pulse",
+      "atmospheric floating particles",
+      "seamless ticker loop"
+    ]
+  },
+  "assets": {
+    "background": "https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fbackground_main-1773309580452.png",
+    "texture_overlay": "https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fbg_texture-1773309711370.png",
+    "foreground_botanical": "https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fforeground_botanical-1773309657273.png",
+    "deal_burst_badge": "https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773309444114%2Fassets%2Fdeal_burst-1773309687790.png",
+    "fonts": ["Bebas Neue", "Barlow Condensed"]
+  },
+  "branding": {
+    "client": "Quality Roots",
+    "palette_primary": "#7BC940",
+    "palette_background": "#0A1F0D",
+    "ticker_bg": "#7BC940",
+    "ticker_text": "#0A1F0D"
+  },
+  "technical": {
+    "resolution": "1920x1080",
+    "aspect_ratio": "16:9",
+    "performance": "optimized",
+    "browser_compatibility": "chrome_latest",
+    "no_user_interaction": true,
+    "time_based_only": true
+  }
+}
